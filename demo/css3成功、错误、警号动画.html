@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>动画</title>
+    <style>
+
+        .container {
+            width: 600px;
+            height: 400px;
+            border: 1px solid #f5f5f5;
+        }
+        .container .icon{
+            width: 80px;
+            height: 80px;
+            border: 4px solid gray;
+            border-radius: 50%;
+            margin: 20px auto;
+            position: relative;
+            box-sizing: content-box;
+        }
+        .container .icon.error {
+            border-color: #F27474;
+            animation:animateErrorIcon 0.5s;
+        }
+        .container .icon.error .x-mark {
+            position: relative;
+            display: block;
+            animation:animateXMark 0.5s;
+        }
+        .container .icon.error .line {
+            position: absolute;
+            height: 5px;
+            width: 47px;
+            background-color: #F27474;
+            display: block;
+            top: 37px;
+            border-radius: 2px;
+        }
+        .container .icon.error .line.left {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            left: 17px;
+        }
+        .container .icon.error .line.right {
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            right: 16px;
+        }
+        .container .icon.warning {
+            border-color: #F8BB86;
+        }
+        .container .icon.warning .body {
+            position: absolute;
+            width: 5px;
+            height: 47px;
+            left: 50%;
+            top: 10px;
+            border-radius: 2px;
+            margin-left: -2px;
+            background-color: #F8BB86;
+            animation: pulseWarningIns 0.75s infinite alternate;
+        }
+        .container .icon.warning .dot {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            margin-left: -3px;
+            left: 50%;
+            bottom: 10px;
+            background-color: #F8BB86;
+            animation: pulseWarningIns 0.75s infinite alternate;
+        }
+        .container .icon.success {
+            border-color: #A5DC86;
+        }
+        .container .icon.success::before, .container .icon.success::after {
+            content: '';
+            border-radius: 50%;
+            position: absolute;
+            width: 60px;
+            height: 120px;
+            background: white;
+            transform: rotate(45deg);
+        }
+        .container .icon.success::before {
+            border-radius: 120px 0 0 120px;
+            top: -7px;
+            left: -33px;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            -webkit-transform-origin: 60px 60px;
+            transform-origin: 60px 60px;
+        }
+        .container .icon.success::after {
+            border-radius: 0 120px 120px 0;
+            top: -11px;
+            left: 30px;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            -webkit-transform-origin: 0px 60px;
+            transform-origin: 0px 60px;
+            animation: rotatePlaceholder  4.25s ease-in;
+        }
+        .container .icon.success .placeholder {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(165, 220, 134, 0.2);
+            border-radius: 50%;
+            box-sizing: content-box;
+            position: absolute;
+            left: -4px;
+            top: -4px;
+            z-index: 2;
+        }
+        .container .icon.success .fix {
+            width: 5px;
+            height: 90px;
+            background-color: white;
+            position: absolute;
+            left: 28px;
+            top: 8px;
+            z-index: 1;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+        .container .icon.success .line {
+            height: 5px;
+            background-color: #A5DC86;
+            display: block;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 2;
+        }
+        .container .icon.success .line.tip {
+            width: 25px;
+            left: 14px;
+            top: 46px;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            animation:animateSuccessTip .75s;
+        }
+        .container .icon.success .line.long {
+            width: 47px;
+            right: 8px;
+            top: 38px;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            animation:animateSuccessLong .75s
+        }
+        /* 成功 */
+        @-webkit-keyframes animateSuccessTip {
+            0% {
+                width: 0;
+                left: 1px;
+                top: 19px;
+            }
+            54% {
+                width: 0;
+                left: 1px;
+                top: 19px;
+            }
+            70% {
+                width: 50px;
+                left: -8px;
+                top: 37px;
+            }
+            84% {
+                width: 17px;
+                left: 21px;
+                top: 48px;
+            }
+            100% {
+                width: 25px;
+                left: 14px;
+                top: 45px;
+            }
+        }
+        @-webkit-keyframes animateSuccessLong {
+            0% {
+                width: 0;
+                right: 46px;
+                top: 54px;
+            }
+            65% {
+                width: 0;
+                right: 46px;
+                top: 54px;
+            }
+            84% {
+                width: 55px;
+                right: 0px;
+                top: 35px;
+            }
+            100% {
+                width: 47px;
+                right: 8px;
+                top: 38px;
+            }
+        }
+        @-webkit-keyframes rotatePlaceholder {
+            0% {
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+            }
+            5% {
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+            }
+            12% {
+                transform: rotate(-405deg);
+                -webkit-transform: rotate(-405deg);
+            }
+            100% {
+                transform: rotate(-405deg);
+                -webkit-transform: rotate(-405deg);
+            }
+        }
+        /* 错误 */
+        @-webkit-keyframes animateErrorIcon {
+            0% {
+                transform: rotateX(100deg);
+                -webkit-transform: rotateX(100deg);
+                opacity: 0;
+            }
+            100% {
+                transform: rotateX(0deg);
+                -webkit-transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes animateXMark {
+            0% {
+                transform: scale(0.4);
+                -webkit-transform: scale(0.4);
+                margin-top: 26px;
+                opacity: 0;
+            }
+            50% {
+                transform: scale(0.4);
+                -webkit-transform: scale(0.4);
+                margin-top: 26px;
+                opacity: 0;
+            }
+            80% {
+                transform: scale(1.15);
+                -webkit-transform: scale(1.15);
+                margin-top: -6px;
+            }
+            100% {
+                transform: scale(1);
+                -webkit-transform: scale(1);
+                margin-top: 0;
+                opacity: 1;
+            }
+        }
+        /* 警号 */
+        @-webkit-keyframes pulseWarningIns {
+            0% {
+                background-color: #F8D486;
+            }
+            100% {
+                background-color: #F8BB86;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="icon error">
+         <span class="x-mark">
+            <span class="line left"></span>
+            <span class="line right"></span>
+        </span>
+    </div>
+    <div class="icon warning">
+        <span class="body"></span>
+        <span class="dot"></span>
+    </div>
+    <div class="icon success">
+        <span class="line tip"></span>
+        <span class="line long"></span>
+        <div class="placeholder"></div>
+        <div class="fix"></div>
+    </div>
+</div>
+
+</body>
+</html>
